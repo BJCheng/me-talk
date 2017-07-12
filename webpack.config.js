@@ -17,6 +17,7 @@ module.exports = {
             test: /\.scss$/,
             exclude: /node_modules/,
             loaders: ['style-loader', 'css-loader', 'sass-loader']
+            // loader: 'css-loader?modules=true' ==> it will make materialize css also local
         }, {
             test: /\.(woff|woff2)(\?v=\d+\.\d+\.\d+)?$/,
             loader: 'url-loader',

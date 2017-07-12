@@ -1,15 +1,15 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import App from './components/app';
+import AppContanier from './components/app-container';
 import { Provider } from 'react-redux';
 import { createStore } from 'redux';
-// import { whatsappBen } from './reducers/reducer';
+import reducer from './redux/reducer';
 
-// const store = createStore(whatsappBen);
+const store = createStore(reducer);
 
 ReactDOM.render(
-    // <Provider store={store}>
-        <App />
-    // </Provider>,
-    ,document.getElementById('root')
+    <Provider store={store}>
+        <AppContanier />
+    </Provider>,
+    document.getElementById('root')
 );

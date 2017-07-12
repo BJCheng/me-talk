@@ -1,0 +1,35 @@
+.chat{
+  height: 100%;
+}
+
+.outerContainer{
+    display: flex;
+    justify-content: center;
+    background-color: #128C7E;
+}
+
+.outerItem{
+    flex: 5;
+}
+
+.outerRightItem, .outerLeftItem{
+    flex: 1;
+}
+
+.innerContainer{
+    display: flex;
+    flex-direction: column;
+    height: 100%
+}
+
+.innerItemMessages{
+    flex: 1;
+    overflow: auto;
+}
+
+//寬度大於468px時
+@media(min-width:900px){
+    .outerRightItem, .outerLeftItem{
+        flex: 1.5;
+    }
+}
