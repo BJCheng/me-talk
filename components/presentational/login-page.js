@@ -1,5 +1,9 @@
 import React from 'react';
 import loginPageStyle from './login-page.scss';
+import RaisedButton from 'material-ui/RaisedButton';
+import FlatButton from 'material-ui/FlatButton';
+import injectTapEventPlugin from 'react-tap-event-plugin';
+injectTapEventPlugin();
 
 function LoginPage(props) {
     return (
@@ -28,8 +32,9 @@ function LoginPage(props) {
                         </div>
                     </div>
                     <div className="card-action right-align">
-                        <button type="reset" id="reset" className="btn-flat grey-text waves-effect">reset</button>
-                        <button type="submit" className="btn green waves-effect waves-light">Login</button>
+                        {/* <button type="reset" id="reset" className="btn-flat grey-text waves-effect">reset</button> */}
+                        <FlatButton label="reset" secondary={true}></FlatButton>
+                        <RaisedButton type="submit" label="Login" style={{ backgroundColor: "#47B04B" }} primary={true}></RaisedButton>
                     </div>
                 </form>
             </div>

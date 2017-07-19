@@ -2,10 +2,11 @@
 import React from 'react';
 import LoginPage from './presentational/login-page'
 import LoginContainer from './login-container';
-import appStyle from '../public/sass/app.scss';
+import appStyle from './app.scss';
 import ChatContainer from './chat-container'
 import { connect } from 'react-redux';
 import AppPage from '../constants/app-page';
+// import $ from 'jquery';
 
 function basedOnIsLoggedIn(isLoggedIn) {
     if (isLoggedIn)
@@ -15,8 +16,8 @@ function basedOnIsLoggedIn(isLoggedIn) {
 
 function mapStateToProps(state) {
     return {
-        // appPage: basedOnIsLoggedIn(state.isLoggedIn)  ==>不會re-render
         appPage: state.isLoggedIn ? AppPage.ChatPage : AppPage.LoginPage
+        // appPage: basedOnIsLoggedIn(state.isLoggedIn)  ==>不會re-render
     };
 }
 
@@ -25,7 +26,6 @@ function mapDispatchToProps(dispatch) {
 }
 
 function App(props) {
-    console.log('props in app:', props);
     return (
         <div>
             {renderLayout(props)}
@@ -37,7 +37,7 @@ function App(props) {
             case AppPage.LoginPage:
                 return <LoginContainer />;
             case AppPage.ChatPage:
-                return <ChatContainer />;
+                return <ChatContainer isLoggedIn={true}/>;
             default:
                 return <LoginContainer />;
         }
