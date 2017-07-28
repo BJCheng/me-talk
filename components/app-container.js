@@ -8,12 +8,6 @@ import { connect } from 'react-redux';
 import AppPage from '../constants/app-page';
 // import $ from 'jquery';
 
-function basedOnIsLoggedIn(isLoggedIn) {
-    if (isLoggedIn)
-        return AppPage.Chat;
-    return AppPage.Login;
-}
-
 function mapStateToProps(state) {
     return {
         appPage: state.isLoggedIn ? AppPage.ChatPage : AppPage.LoginPage
@@ -37,7 +31,7 @@ function App(props) {
             case AppPage.LoginPage:
                 return <LoginContainer />;
             case AppPage.ChatPage:
-                return <ChatContainer isLoggedIn={true}/>;
+                return <ChatContainer />;
             default:
                 return <LoginContainer />;
         }

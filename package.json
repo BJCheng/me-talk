@@ -6,7 +6,7 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "webpack": "webpack --watch --progress",
-    "dev": "webpack-dev-server", 
+    "dev": "webpack-dev-server",
     "start": "npm run webpack & nodemon app"
   },
   "repository": {
@@ -34,6 +34,7 @@
     "react": "^15.6.1",
     "react-dom": "^15.6.1",
     "react-redux": "^5.0.5",
+    "react-router-dom": "^4.1.2",
     "react-tap-event-plugin": "^2.0.1",
     "redux": "^3.7.1",
     "sass-loader": "^6.0.6",
@@ -45,6 +46,7 @@
   "dependencies": {
     "cors": "^2.8.3",
     "express": "^4.15.3",
-    "jquery": "^3.2.1"
+    "jquery": "^3.2.1",
+    "socket.io": "^2.0.3"
   }
 }
