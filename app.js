@@ -1,16 +1,12 @@
 const express = require('express');
 const app = express();
-const configIo  = require('./socket/index');
+const configIo = require('./socket/index');
+const configRoutes = require('./routes');
 
 app.use('/bundle', express.static('bundle'));
 app.use('/public', express.static('public'));
 
-app.get('/', (req, res) => {
-    res.sendFile(__dirname + '/index.html');
-});
-app.get('/chat', (req, res) => {
-    res.sendFile(__dirname + '/chat.html');
-});
+configRoutes(app);
 
 app.set('port', 3000);
 

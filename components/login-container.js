@@ -14,7 +14,7 @@ function mapDispatchToProps(dispatch) {
     return {
         handleAccountValidation: function (email, password) {
             // dispatch(Actions.Fetching());
-            dispatch(Actions.Login(email, password))
+            dispatch(Actions.VerifyAccount(email, password))
         }, 
 
         handleEmailChange: function(e){

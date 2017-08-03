@@ -14,22 +14,33 @@ class Chat extends React.Component {
     }
 
     componentWillMount() {
-        //1. 開我的namespace的socket
-        //我從超連結打開的話我的namespace就從query string來
-        //我從登入畫面登入進來的話我的namespace就從使用者輸入的email來
-        const myNamespace = (this.props.match) ? this.props.match.params.namespace : this.props.myNamespace;
-        const theOtherNamespace = myNamespace.startsWith('un-') ? '' : this.props.theOtherNamespace;
-        this.myNamespace = myNamespace;
-        this.theOtherNamespace = theOtherNamespace;
+        //get namespaces and store it under 'this'
+        if (this.props.match) {
+            // this.myNamespace = this.props.match.params.namespace;
+            this.myNamespace = '185ba8ce-e82c-40ed-8379-66ac9adbf659';
+        } else {
+            this.myNamespace = this.props.myNamespace;
+            this.theOtherNamespace = this.props.theOtherNamespace;
+        }
+
         const socket = io(`/${this.myNamespace}`);
         this.chatSocket = socket;
-        let { dispatchReceiveMsg } = this.props;  //=>cannot access this.props within from-server event.
-        socket.on('from-server', function (data) {
+
+        //update messages's id
+        socket.on('sender-receive', (data) => {
+            this.props.dispatchUpdateMsgId(data);
+        });
+
+        let { dispatchReceiveMsg } = this.props;  //=>cannot access 「this.props」 within from-server event.
+        socket.on('receiver-receive', function (data) {
             console.log('someone send you:', data);
+            let msg = Object.assign({}, data, { isMine: false });
             //1. 如果傳訊息給我的人是我正在交談的對象，就更新聊天室的內容
-            // dispatchReceiveMsg();
+            dispatchReceiveMsg(msg);
             //2. 如果傳訊息給我的人不是我正在交談的對象，就更新左邊的聊天室介面，增加未讀數並且按照訊息傳送時間排序
-        })
+        });
+
+        //dispatch an action to load the history messages
     }
 
     componentDidMount() {
@@ -40,7 +51,7 @@ class Chat extends React.Component {
     }
 
     render() {
-        // console.log('render');
+        console.log('msgs:', this.props.msgs);
         return (
             <div style={{ height: '100%' }}>
                 <Drawer open={this.props.isLoggedIn} width='15%'>
@@ -57,7 +68,7 @@ class Chat extends React.Component {
                                 <ChatHeader chatPal={{ name: 'test', lastSendTime: '123' }} />
                             </div>
                             <div className="innerItemMessages">
-                                <Messages />
+                                <Messages msgs={this.props.msgs} />
                             </div>
                             <div className="innerItemFooter">
                                 <SendFooter handleSendMsg={this.handleSendMsg} handleMsgOnChange={this.props.handleMsgOnChange}
@@ -77,12 +88,21 @@ class Chat extends React.Component {
         if (!this.props.msgContent) {
             return;
         }
+        let msg = { 
+            id: undefined, 
+            tempId: this.props.msgs.length+1, 
+            isMine: true, 
+            content: this.props.msgContent, 
+            time: new Date(), 
+            theOther: this.theOtherNamespace 
+        };
+        this.props.dispatchSendMsg(msg);
         //get the message content
         //generate message with 1.id 2.receiving namespace
         //append messsage
         //dispatch sending action and inticating it's waiting for server
         console.log('this.theOtherNamespace after handleSendMsg', this.theOtherNamespace);
-        this.chatSocket.emit('client-send', { msg: this.props.msgContent, theOther: this.theOtherNamespace });
+        this.chatSocket.emit('sender-send', msg);
         this.props.clearMsgContent();
     }
 }

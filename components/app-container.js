@@ -6,12 +6,11 @@ import appStyle from './app.scss';
 import ChatContainer from './chat-container'
 import { connect } from 'react-redux';
 import AppPage from '../constants/app-page';
-// import $ from 'jquery';
 
 function mapStateToProps(state) {
     return {
-        appPage: state.isLoggedIn ? AppPage.ChatPage : AppPage.LoginPage
-        // appPage: basedOnIsLoggedIn(state.isLoggedIn)  ==>不會re-render
+        appPage: state.isLoggedIn ? AppPage.ChatPage : AppPage.LoginPage, 
+        namespace: state.namespace
     };
 }
 
@@ -31,7 +30,7 @@ function App(props) {
             case AppPage.LoginPage:
                 return <LoginContainer />;
             case AppPage.ChatPage:
-                return <ChatContainer />;
+                return <ChatContainer namespace={props.namespace}/>;
             default:
                 return <LoginContainer />;
         }

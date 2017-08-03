@@ -1,0 +1,20 @@
+.tickDefault{
+    visibility: hidden;
+}
+
+.serverReceived{ 
+    //one grey
+    background-image:url(/public/images/user.png); 
+    width:2px; 
+    height:2px;
+    display: block;
+    float: right;
+}
+
+.receiverReceived{
+    //two grey
+}
+
+.receiverRead{
+    //two blue
+}
