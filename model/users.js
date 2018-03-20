@@ -1,5 +1,6 @@
 var mongoCollections = require('./mongo-collections');
 var getUsersCollection = mongoCollections.users;
+var getMessagesCollection = mongoCollections.messages;
 
 function findWithEmail(email) {
     return getUsersCollection().then((usersCollection) => {
@@ -10,6 +11,12 @@ function findWithEmail(email) {
 function findAll() {
     return getUsersCollection().then((usersCollection) => {
         return usersCollection.find().toArray();
+    });
+}
+
+function findAllMessages() {
+    return getMessagesCollection().then((messagesCollection) => {
+        return messagesCollection.find().toArray();
     });
 }
 

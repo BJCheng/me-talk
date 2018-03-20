@@ -3,6 +3,7 @@ import chat from './presentational/chat';
 import Actions from '../redux/actions';
 
 function mapStateToProps(state, ownProps) {
+    console.log('chat container');
     return {
         isLoggedIn: state.isLoggedIn, 
         myNamespace: ownProps.namespace, 

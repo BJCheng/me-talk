@@ -6,6 +6,7 @@ import ChatStyle from './chat.scss';
 import Drawer from 'material-ui/Drawer';
 import MenuItem from 'material-ui/MenuItem';
 import io from 'socket.io-client';
+// import messageModel from '../../model/users';
 
 class Chat extends React.Component {
     constructor() {
@@ -44,6 +45,10 @@ class Chat extends React.Component {
     }
 
     componentDidMount() {
+        // load msgs from message model and dispatch action
+        // messageModel.findAll().forEach(msg => {
+        //     this.props.dispatchSendMsg(msg);
+        // });
     }
 
     componentWillUnmount() {
@@ -88,13 +93,13 @@ class Chat extends React.Component {
         if (!this.props.msgContent) {
             return;
         }
-        let msg = { 
-            id: undefined, 
-            tempId: this.props.msgs.length+1, 
-            isMine: true, 
-            content: this.props.msgContent, 
-            time: new Date(), 
-            theOther: this.theOtherNamespace 
+        let msg = {
+            id: this.props.msgs.length + 1,
+            tempId: this.props.msgs.length + 1,
+            isMine: true,
+            content: this.props.msgContent,
+            time: new Date(),
+            theOther: this.theOtherNamespace
         };
         this.props.dispatchSendMsg(msg);
         //get the message content

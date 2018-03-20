@@ -9,10 +9,12 @@ module.exports = async function (httpServer) {
     let users = await usersModel.findAll();
     users.forEach((user) => {
         io.of(user.namespace).on('connection', (socket) => {
-            console.log(`${user.email} connected with namespace: ${user.namespace}`);
+            // console.log(`${user.email} connected with namespace: ${user.namespace}`);
+            console.log(`a user connected with namespace: ${user.namespace}`);
             socket.on('sender-send', (data) => {
                 let serverGenerateId = { id: uuid() };
                 let newMsg = Object.assign({}, data, serverGenerateId);
+                // store message into database
                 setTimeout(() => { socket.emit('sender-receive', newMsg) }, 1000);
 
                 var theOtherSocket = io.of(data.theOther);

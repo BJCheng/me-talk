@@ -43,7 +43,7 @@ class LoginPage extends React.Component {
                             </div>
                         </div>
                         <div className="card-action right-align">
-                            <Link to="/chat/un-1"><FlatButton label="Go Chat" /></Link>
+                            <Link to="/chat/185ba8ce-e82c-40ed-8379-66ac9adbf659"><FlatButton label="Go Chat" /></Link>
                             <FlatButton label="reset"></FlatButton>
                             <RaisedButton type="submit" label="Login" style={{ backgroundColor: "#47B04B" }} primary={true}></RaisedButton>
                         </div>

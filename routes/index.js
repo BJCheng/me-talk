@@ -7,7 +7,7 @@ function configRoutes(app) {
     });
 
     app.get('/chat', (req, res) => {
-        res.sendFile(path.resolve('/chat.html'));
+        res.sendFile(path.resolve('chat.html'));
     });
 
     app.get('/verify', async (req, res) => {
